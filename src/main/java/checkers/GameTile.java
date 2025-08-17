@@ -51,12 +51,12 @@ public class GameTile extends JButton {
         // Dark squares occur when (row + col) is odd; light squares when it's even.
         if (!(row % 2 != 0 && col % 2 == 0 || row % 2 == 0 && col % 2 != 0)) {
             Color lightBrown = new Color(227,193,111,255);
-            this.setBackground(lightBrown);
-            originalColor = lightBrown;
+            this.setBackground(Theme.BOARD_LIGHT);
+            originalColor = Theme.BOARD_LIGHT;
         } else {
             Color darkBrown = new Color(184,139,74,255);
-            this.setBackground(darkBrown);
-            originalColor = darkBrown;
+            this.setBackground(Theme.BOARD_DARK);
+            originalColor = Theme.BOARD_DARK;
         }
 
         /* Enable clicking for gameplay. */
@@ -112,7 +112,7 @@ public class GameTile extends JButton {
      * @return an ARGB image with a filled circle
      */
     private static BufferedImage createCircleImage(Color color) {
-        int circleSize = 55;
+        int circleSize = 70;
         BufferedImage image = new BufferedImage(circleSize, circleSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = image.getGraphics();
         g.setColor(color);
@@ -127,7 +127,7 @@ public class GameTile extends JButton {
      * @return an ARGB image with a king-style double circle
      */
     private static BufferedImage createCircleKingImage(Color color) {
-        int circleSize = 55;
+        int circleSize = 70;
         BufferedImage image = new BufferedImage(circleSize, circleSize, BufferedImage.TYPE_INT_ARGB);
         Graphics g = image.getGraphics();
 
@@ -136,7 +136,7 @@ public class GameTile extends JButton {
         g.fillOval(0, 0, circleSize, circleSize);
 
         // Inner disk (gold accent to indicate "king")
-        g.setColor(new Color(196,148,23, 255));
+        g.setColor(Theme.KING_CENTER);
         int innerCircleSize = circleSize * 1/2;
         int innerCircleOffset = (circleSize - innerCircleSize) / 2;
         g.fillOval(innerCircleOffset, innerCircleOffset, innerCircleSize, innerCircleSize);

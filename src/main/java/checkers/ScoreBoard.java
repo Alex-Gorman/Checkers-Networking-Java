@@ -52,8 +52,12 @@ public class ScoreBoard extends JPanel implements GameModelSubscriber {
         add(player2, gbc);
 
         // Border & background theme (matches board palette)
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setBackground(new Color(243, 221, 188));
+        setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Theme.BORDER, 2),
+            BorderFactory.createEmptyBorder(8, 8, 8, 8)
+        ));
+        setBackground(Theme.PARCHMENT_BG);
+        setOpaque(true);
     }
 
     /**

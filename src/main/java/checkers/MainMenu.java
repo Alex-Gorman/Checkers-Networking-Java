@@ -57,7 +57,14 @@ public class MainMenu extends JPanel {
         add(AwayGameButton, gbc);
 
         // Background theme
-        setBackground(new Color(159, 235, 237));
+        setBackground(Theme.MENU_BG);
+        setOpaque(true);
+
+        // give the panel a subtle bottom divider + padding:
+        setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.MENU_BORDER),
+            BorderFactory.createEmptyBorder(16,16,16,16)
+        ));
 
         // Navigate to Host panel
         hostGameButton.addActionListener(e -> {
@@ -82,7 +89,7 @@ public class MainMenu extends JPanel {
 
             // Make background visible and add simple styling
             myHostAddr.setOpaque(true);
-            myHostAddr.setBackground(new Color(51, 255, 249));
+            myHostAddr.setBackground(Theme.WINDOW_BG);
             myHostAddr.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             myHostAddr.setFont(new Font("", Font.BOLD, 20));
 

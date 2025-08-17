@@ -119,8 +119,8 @@ public class GameView extends Panel implements GameModelSubscriber {
                 model.getTiles()[player.row][player.col].assignPiece(player));
 
         // 3) Highlight legal destinations and jump options
-        model.getTilesPlayerCanMoveTo().forEach(tile -> tile.setBackground(Color.ORANGE));
-        model.tilesOfPiecesThatCanJump.forEach(tile -> tile.setBackground(Color.cyan));
+        model.getTilesPlayerCanMoveTo().forEach(tile -> tile.setBackground(Theme.MOVE_HL));
+        model.tilesOfPiecesThatCanJump.forEach(tile -> tile.setBackground(Theme.JUMP_HL));
     }
 
     /**
@@ -133,7 +133,7 @@ public class GameView extends Panel implements GameModelSubscriber {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    model.addPiecePlayerTwo(new Piece(row, col, false, white));
+                    model.addPiecePlayerTwo(new Piece(row, col, false, Theme.PIECE_WHITE));
                 }
             }
         }
@@ -142,7 +142,7 @@ public class GameView extends Panel implements GameModelSubscriber {
         for (int row = 5; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    model.addPiecePlayerOne(new Piece(row, col, true, black));
+                    model.addPiecePlayerOne(new Piece(row, col, true,  Theme.PIECE_BLACK));
                 }
             }
         }
@@ -157,7 +157,7 @@ public class GameView extends Panel implements GameModelSubscriber {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    model.addPiecePlayerTwo(new Piece(row, col, false, black));
+                    model.addPiecePlayerTwo(new Piece(row, col, false, Theme.PIECE_BLACK));
                 }
             }
         }
@@ -166,7 +166,8 @@ public class GameView extends Panel implements GameModelSubscriber {
         for (int row = 5; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    model.addPiecePlayerOne(new Piece(row, col, true, white));
+                    model.addPiecePlayerOne(new Piece(row, col, true,  Theme.PIECE_WHITE));
+
                 }
             }
         }
