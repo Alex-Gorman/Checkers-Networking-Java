@@ -73,7 +73,7 @@ public class ClientGame extends JPanel {
         scoreBoard.setPreferredSize(new Dimension(300, 100));
 
         // Background tint for this container (semi-transparent cyan)
-        this.setBackground(new Color(159, 235, 237, 160));
+        this.setBackground(new Color(159, 235, 237));
 
         // Quit button → asks controller to perform quit logic (and inform server)
         JButton quitButton = new JButton("Quit Game");
@@ -87,35 +87,62 @@ public class ClientGame extends JPanel {
         quitPanel.setBackground(new Color(159, 235, 237, 0));
 
         /* ----- Layout ----- */
-        GridBagLayout layout = new GridBagLayout();
-        this.setLayout(layout);
+
+        /* ----- Layout ----- */
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(7, 7, 7, 7);
+        gbc.insets = new Insets(7,7,7,7);
 
-        // Board (spans two columns, three rows)
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridheight = 3;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(gameView, gbc);
+        // Board (left), big and stretchy
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2; gbc.gridheight = 3;
+        gbc.weightx = 1.0; gbc.weighty = 1.0; gbc.fill = GridBagConstraints.BOTH;
+        add(gameView, gbc);
 
-        // Chat (right column, middle row)
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        this.add(chatView, gbc);
+        // Score (top-right)
+        gbc.gridx = 2; gbc.gridy = 0; gbc.gridwidth = 1; gbc.gridheight = 1;
+        gbc.weightx = 0; gbc.weighty = 0; gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(scoreBoard, gbc);
 
-        // Scoreboard (right column, top row)
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        this.add(scoreBoard, gbc);
+        // Chat (middle-right) — give it vertical weight so Send won't be clipped
+        gbc.gridx = 2; gbc.gridy = 1;
+        gbc.weighty = 1.0; gbc.fill = GridBagConstraints.BOTH;
+        add(chatView, gbc);
 
-        // Quit (right column, bottom row)
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        this.add(quitPanel, gbc);
+        // Quit (bottom-right)
+        gbc.gridx = 2; gbc.gridy = 2;
+        gbc.weighty = 0; gbc.fill = GridBagConstraints.NONE;
+        add(quitPanel, gbc);
+
+        
+        // GridBagLayout layout = new GridBagLayout();
+        // this.setLayout(layout);
+        // GridBagConstraints gbc = new GridBagConstraints();
+        // gbc.insets = new Insets(7, 7, 7, 7);
+
+        // // Board (spans two columns, three rows)
+        // gbc.gridx = 0;
+        // gbc.gridy = 0;
+        // gbc.gridheight = 3;
+        // gbc.gridwidth = 2;
+        // gbc.fill = GridBagConstraints.HORIZONTAL;
+        // this.add(gameView, gbc);
+
+        // // Chat (right column, middle row)
+        // gbc.gridx = 2;
+        // gbc.gridy = 1;
+        // gbc.gridheight = 1;
+        // gbc.gridwidth = 1;
+        // this.add(chatView, gbc);
+
+        // // Scoreboard (right column, top row)
+        // gbc.gridx = 2;
+        // gbc.gridy = 0;
+        // this.add(scoreBoard, gbc);
+
+        // // Quit (right column, bottom row)
+        // gbc.gridx = 2;
+        // gbc.gridy = 3;
+        // this.add(quitPanel, gbc);
     }
 
     /** Sends an initial "hello/intro" message to the host (after socket is set). */
