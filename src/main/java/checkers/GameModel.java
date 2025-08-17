@@ -716,7 +716,7 @@ public class GameModel {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    this.addPiecePlayerTwo(new Piece(row, col, false, white));
+                    this.addPiecePlayerTwo(new Piece(row, col, false, Theme.PIECE_WHITE));
                 }
             }
         }
@@ -725,7 +725,7 @@ public class GameModel {
         for (int row = 5; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    this.addPiecePlayerOne(new Piece(row, col, true, black));
+                    this.addPiecePlayerOne(new Piece(row, col, true,  Theme.PIECE_BLACK));
                 }
             }
         }
@@ -743,7 +743,7 @@ public class GameModel {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    this.addPiecePlayerTwo(new Piece(row, col, false, black));
+                    this.addPiecePlayerTwo(new Piece(row, col, false, Theme.PIECE_BLACK));
                 }
             }
         }
@@ -751,7 +751,7 @@ public class GameModel {
         for (int row = 5; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (row % 2 == 0 && col % 2 != 0 || row % 2 != 0 && col % 2 == 0) {
-                    this.addPiecePlayerOne(new Piece(row, col, true, white));
+                    this.addPiecePlayerOne(new Piece(row, col, true,  Theme.PIECE_WHITE));
                 }
             }
         }
@@ -803,18 +803,18 @@ public class GameModel {
     }
 
     /** Sends a chat message (and stores a local copy) with the proper name prefix. */
-    public void sendChatMessage(String msg, boolean isHost){
+    public void sendChatMessage(String msg, boolean isHost) {
+        msg = (msg == null) ? "" : msg.strip();
+        if (msg.isEmpty()) return;
         try {
             if (isHost){
-                this.chatMessage.add(hostName + ": " + msg);
+                chatMessage.add(hostName + ": " + msg);
                 dout.writeUTF(chatPrefix + hostName + ": " + msg);
             } else {
-                this.chatMessage.add(clientName + ": " + msg);
+                chatMessage.add(clientName + ": " + msg);
                 dout.writeUTF(chatPrefix + clientName + ": " + msg);
             }
-        } catch (Exception e){
-            // swallow; UI will reflect disconnection elsewhere
-        }
+        } catch (Exception ignored) {}
         notifySubscribers();
     }
 

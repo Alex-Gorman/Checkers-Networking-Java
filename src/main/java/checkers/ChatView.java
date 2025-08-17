@@ -5,6 +5,7 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.border.Border;
 
 /**
  * ChatView is the chat panel shown alongside the game board.
@@ -30,10 +31,16 @@ public class ChatView extends JPanel implements GameModelSubscriber {
     private static final Font INPUT_FONT = new Font("SAN_SERIF", Font.PLAIN, 16);
     private static final Font SEND_FONT  = new Font("SAN_SERIF", Font.BOLD, 14);
 
+    // Reusable card-style border (gold line + inner padding)
+    private static final Border CARD_BORDER = BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Theme.BORDER, 2),
+            BorderFactory.createEmptyBorder(6, 6, 6, 6)
+    );
+
     /** Background for chat area and input field (match board theme). */
-    private static final Color CHAT_BG = new Color(243, 221, 188);
+    private static final Color CHAT_BG  = Theme.PARCHMENT_BG;
     /** Panel background */
-    private static final Color PANEL_BG = new Color(159, 235, 237);
+    private static final Color PANEL_BG = Theme.WINDOW_BG;
 
     /* ===== MVC collaborators ===== */
     private GameController gameController;
@@ -58,7 +65,7 @@ public class ChatView extends JPanel implements GameModelSubscriber {
     public ChatView(boolean host) {
         this.host = host;
 
-        /* -------- Configure chat log -------- */
+        // --- chat log ---
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -66,50 +73,51 @@ public class ChatView extends JPanel implements GameModelSubscriber {
         textArea.setBackground(CHAT_BG);
         textArea.setOpaque(true);
 
-        // Auto-scroll to the bottom as new text arrives.
         DefaultCaret caret = (DefaultCaret) textArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-        /* Wrap the log in a scroll pane; make both layers opaque to avoid dark bleed-through
-           with some Look & Feels on macOS. */
         scrollPane.setPreferredSize(LOG_PREF_SIZE);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setOpaque(true);
         scrollPane.setBackground(CHAT_BG);
         scrollPane.getViewport().setOpaque(true);
         scrollPane.getViewport().setBackground(CHAT_BG);
 
-        /* -------- Configure input + send -------- */
+        // Card-style borders
+        scrollPane.setBorder(CARD_BORDER);
+        scrollPane.setViewportBorder(BorderFactory.createEmptyBorder());
+        textArea.setMargin(new Insets(6, 6, 6, 6));
+
+        // --- input + send ---
         text.setPreferredSize(INPUT_PREF_SIZE);
         text.setFont(INPUT_FONT);
         text.setBackground(CHAT_BG);
         text.setOpaque(true);
+        text.setBorder(CARD_BORDER);
 
         JButton send = new JButton("Send");
         send.setFont(SEND_FONT);
         send.setPreferredSize(new Dimension(80, 30));
-
-        // Button click: forward to controller and clear input.
         send.addActionListener(e -> trySend());
-
-        // Hitting Enter in the text field sends the message.
         text.addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    trySend();
-                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) trySend();
             }
         });
 
-        /* -------- Layout + panel background -------- */
+        // --- layout ---
         setBackground(PANEL_BG);
         setOpaque(true);
+        setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));  // <— replaces EmptyBorder import
+        setLayout(new BorderLayout(8, 8));
 
-        setLayout(new FlowLayout(FlowLayout.LEFT, 8, 8));
-        add(scrollPane);
-        add(text);
-        add(send);
+        JPanel inputRow = new JPanel(new BorderLayout(8, 0));
+        inputRow.setOpaque(false);
+        inputRow.add(text, BorderLayout.CENTER);
+        inputRow.add(send, BorderLayout.EAST);
+
+        add(scrollPane, BorderLayout.CENTER);
+        add(inputRow, BorderLayout.SOUTH);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -168,7 +176,9 @@ public class ChatView extends JPanel implements GameModelSubscriber {
     private void trySend() {
         if (gameController == null) return;
         String payload = text.getText();
-        if (payload == null || payload.isBlank()) return;
+        if (payload == null) return;
+        payload = payload.trim();
+        if (payload.isEmpty()) return;
 
         try {
             gameController.handleSend(payload, host);
