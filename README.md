@@ -6,7 +6,7 @@ Two-player LAN checkers in Java Swing using TCP sockets; MVC architecture, Gradl
 
 # Features
 - Two players over local network (host + client)
-- Chat panel, score board, jump/multi-jump rules
+- Chat panel, scoreboard, jump/multi-jump rules
 - MVC separation (model / view / controller)
 - Gradle build + wrapper; runs on Java 21
 
@@ -108,3 +108,15 @@ kill -9 <pid>
 - **Connection refused:** host not running, wrong port, or mismatch.
 - **No route to host:** wrong IP / not same LAN / firewall. Use host’s IPv4.
 
+# Project history
+- **2023:** Initial version built as a two-player LAN checkers game in Java Swing.
+- **2025:** Migrated to this repo for ongoing maintenance and easier setup.
+  - Switched to Gradle + wrapper, Java 21 toolchain.
+  - Added clearer README and run instructions (JAR + Look & Feel flags).
+  - Improved in-code documentation/Javadoc and minor UI fixes.
+
+> Note: Commit history before 2025 is not preserved here. If needed, the previous repo is: [old repo link](https://github.com/Alex-Gorman/Checkers-Networking/tree/ChatWithGame).
+
+**Credits:**
+- **Alex Gorman** - game mechanics, socket protocol, move sync, scoring; Gradle/Java 21 migration; documentation.
+- - **[Yi Luan](https://github.com/LuanGIH)** — initial socket setup, chat.
