@@ -74,7 +74,27 @@ JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true -Dswing.defaultlaf=javax.swin
 
 
 # Screenshots
-![Gameplay](docs/screenshot.png)
+
+| Host menu | Client menu |
+|---|---|
+| ![Host menu](docs/screenshots/host-menu.png)<br><sub>Host menu</sub> | ![Client menu](docs/screenshots/client-menu.png)<br><sub>Client menu</sub> |
+
+| Blue tiles (legal moves) | Orange = must-move piece |
+|---|---|
+| ![Blue tiles show where player can move](docs/screenshots/blue-tiles-show-where-player-can-move.png)<br><sub>Blue tiles show where player can move</sub> | ![Orange means player must move this piece](docs/screenshots/orange-means-player-must-move-this-piece.png)<br><sub>Forced-move indicator</sub> |
+
+| One of two pieces must move | King can move up or down |
+|---|---|
+| ![One of 2 pieces must be moved](docs/screenshots/one-of-2-pieces-must-be-moved.png)<br><sub>One of two pieces must be moved</sub> | ![King can move up or down](docs/screenshots/king-can-move-up-or-down.png)<br><sub>King movement</sub> |
+
+| Multiple kings | Score update |
+|---|---|
+| ![Multiple kings](docs/screenshots/multiple-kings.png)<br><sub>Multiple kings</sub> | ![Score update](docs/screenshots/score-update.png)<br><sub>Score update</sub> |
+
+| Score 1–0 (highlighted moves) | Game about to end |
+|---|---|
+| ![Score 1–0; blue shows where chosen player can move](docs/screenshots/score-1-0-blue-shows-where-chosen-player-can-move.png)<br><sub>Score 1–0, legal moves highlighted</sub> | ![Game about to end](docs/screenshots/game-about-to-end.png)<br><sub>Game about to end</sub> |
+
 
 # Project Structure
 ```
