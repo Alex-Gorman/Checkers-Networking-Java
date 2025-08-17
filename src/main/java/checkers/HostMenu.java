@@ -1,4 +1,4 @@
-package checkers; // import Game.GamePanelHost;
+package checkers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -105,8 +105,7 @@ public class HostMenu extends JPanel {
         });
 
         /* ----- Layout ----- */
-
-        setBackground(new Color(159, 235, 237)); // themed cyan background
+        setBackground(Theme.MENU_BG);
 
         GridBagLayout layout = new GridBagLayout();
         setLayout(layout);

@@ -95,7 +95,7 @@ public class ClientMenu extends JPanel {
 
         /* ---- Layout ---- */
         setOpaque(true);
-        setBackground(new Color(159, 235, 237)); // themed cyan background
+        setBackground(Theme.MENU_BG);
 
         GridBagLayout layout = new GridBagLayout();
         setLayout(layout);
