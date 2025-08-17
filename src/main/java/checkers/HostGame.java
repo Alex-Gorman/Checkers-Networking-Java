@@ -83,12 +83,10 @@ public class HostGame extends JPanel {
         quitButton.addActionListener(e -> gameController.quitGame());
 
         // Panel styling
-        setBackground(new Color(159, 235, 237));
+        setBackground(Theme.WINDOW_BG); setOpaque(true);
         JPanel quitPanel = new JPanel();
         quitPanel.add(quitButton);
-        quitPanel.setBackground(new Color(159, 235, 237, 0));
-
-        /* ----- Layout ----- */
+        quitPanel.setBackground(Theme.WINDOW_BG); quitPanel.setOpaque(true);
 
         /* ----- Layout ----- */
         setLayout(new GridBagLayout());
@@ -114,31 +112,6 @@ public class HostGame extends JPanel {
         gbc.gridx = 2; gbc.gridy = 2;
         gbc.weighty = 0; gbc.fill = GridBagConstraints.NONE;
         add(quitPanel, gbc);
-
-
-        // GridBagLayout layout = new GridBagLayout();
-        // setLayout(layout);
-        // GridBagConstraints gbc = new GridBagConstraints();
-        // gbc.insets = new Insets(7, 7, 7, 7);
-
-        // // Board (spans two columns, two rows)
-        // gbc.gridx = 0; gbc.gridy = 0;
-        // gbc.gridheight = 2; gbc.gridwidth = 2;
-        // gbc.fill = GridBagConstraints.HORIZONTAL;
-        // add(gameView, gbc);
-
-        // // Chat (right column, middle row)
-        // gbc.gridx = 2; gbc.gridy = 1;
-        // gbc.gridheight = 1; gbc.gridwidth = 1;
-        // add(chatView, gbc);
-
-        // // Scoreboard (right column, top row)
-        // gbc.gridx = 2; gbc.gridy = 0;
-        // add(scoreBoard, gbc);
-
-        // // Quit (right column, bottom row)
-        // gbc.gridx = 2; gbc.gridy = 3;
-        // add(quitPanel, gbc);
     }
 
     /** Sends the host's username to the client using the init prefix. */

@@ -73,7 +73,7 @@ public class ClientGame extends JPanel {
         scoreBoard.setPreferredSize(new Dimension(300, 100));
 
         // Background tint for this container (semi-transparent cyan)
-        this.setBackground(new Color(159, 235, 237));
+        this.setBackground(Theme.WINDOW_BG); setOpaque(true);
 
         // Quit button → asks controller to perform quit logic (and inform server)
         JButton quitButton = new JButton("Quit Game");
@@ -84,7 +84,8 @@ public class ClientGame extends JPanel {
         // Panel to hold the quit button (transparent to show parent background)
         JPanel quitPanel = new JPanel();
         quitPanel.add(quitButton);
-        quitPanel.setBackground(new Color(159, 235, 237, 0));
+        quitPanel.setBackground(Theme.WINDOW_BG); quitPanel.setOpaque(true);
+
 
         /* ----- Layout ----- */
 
