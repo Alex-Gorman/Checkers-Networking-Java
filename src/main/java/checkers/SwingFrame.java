@@ -27,7 +27,10 @@ public class SwingFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         /* Initial window size (can be resized later by the user) */
-        frame.setSize(1000, 1000);
+        frame.setSize(1150, 800);
+
+        /* Disable resize */
+        frame.setResizable(false);
 
         /* Build the two sub-menus that MainMenu routes to */
         ClientMenu clientMenu = new ClientMenu(frame);
