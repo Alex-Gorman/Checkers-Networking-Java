@@ -119,4 +119,4 @@ kill -9 <pid>
 
 **Credits:**
 - **Alex Gorman** - game mechanics, socket protocol, move sync, scoring; Gradle/Java 21 migration; documentation.
-- - **[Yi Luan](https://github.com/LuanGIH)** — initial socket setup, chat.
+- **[Yi Luan](https://github.com/LuanGIH)** — initial socket setup, chat.
