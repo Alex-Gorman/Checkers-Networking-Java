@@ -62,8 +62,8 @@ public class ScoreBoard extends JPanel implements GameModelSubscriber {
      */
     public void setModel(GameModel newGameModel) {
         model = newGameModel;
-        player1.setText(model.hostName + ": " + model.hostScore);
-        player2.setText(model.clientName + ": " + model.clientScore);
+        player1.setText(" " + model.hostName + ": " + model.hostScore);
+        player2.setText(" " + model.clientName + ": " + model.clientScore);
     }
 
     /**
@@ -80,8 +80,8 @@ public class ScoreBoard extends JPanel implements GameModelSubscriber {
      */
     @Override
     public void modelUpdated() {
-        player1.setText(model.hostName + ": " + model.hostScore);
-        player2.setText(model.clientName + ": " + model.clientScore);
+        player1.setText(" " + model.hostName + ": " + model.hostScore);
+        player2.setText(" " + model.clientName + ": " + model.clientScore);
         revalidate();
         repaint();
     }
